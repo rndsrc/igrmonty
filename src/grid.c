@@ -56,9 +56,9 @@ void Xtoijk(const double X[NDIM], int *i, int *j, int *k, double del[NDIM])
 
   // get provisional zone index. see note above function for details. note we
   // shift to zone centers because that's where variables are most exact.
-  *i = (int) ((XG[1] - startx[1]) / dx[1] - 0.5 + 1000) - 1000;
-  *j = (int) ((XG[2] - startx[2]) / dx[2] - 0.5 + 1000) - 1000;
-  *k = (int) ((phi  - startx[3]) / dx[3] - 0.5 + 1000) - 1000;  
+  *i = ((int) ((XG[1] - startx[1]) / dx[1] - 0.5 + 1000) - 1000) & ~1;
+  *j = ((int) ((XG[2] - startx[2]) / dx[2] - 0.5 + 1000) - 1000) & ~1;
+  *k = ((int) ((phi   - startx[3]) / dx[3] - 0.5 + 1000) - 1000) & ~1;
 
   // don't allow "center zone" to be outside of [0,N*-1]. this will often fire
   // for exotic corodinate systems and occasionally for normal ones. wrap x3.
